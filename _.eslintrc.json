@@ -1,0 +1,17 @@
+{
+  "extends": ["@grepp/eslint-config-import", "@grepp/eslint-config"],
+  "ignorePatterns": ["app-templates", "coverage", "dist", "dist-ssr"],
+  "overrides": [
+    {
+      "env": {
+        "jest/globals": true
+      },
+      "extends": ["plugin:jest/recommended"],
+      "files": [
+        "**/__tests__/**/*.[jt]s?(x)",
+        "**/?(*.)+(spec|test).[tj]s?(x)"
+      ],
+      "plugins": ["jest"]
+    }
+  ]
+}

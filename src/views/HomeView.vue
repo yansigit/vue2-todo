@@ -1,18 +1,30 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <li v-for="todo in todos" v-bind:key="todo">
+      {{ todo.text }}
+    </li>
+    <todo-item v-for="item in todos" v-bind:todo="item" v-bind:key="item.text">
+    </todo-item>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import mockup from '@/store/mockup';
+import Vue from 'vue';
 
-@Component({
-  components: {
-    HelloWorld,
+// 화면에서 표시 안되는 문제 있음
+Vue.component('todo-item', {
+  props: ['todo'],
+  template: '<li>{{ todo.text }}</li>',
+});
+
+export default {
+  components: {},
+  data: function () {
+    return {
+      todos: mockup,
+    };
   },
-})
-export default class HomeView extends Vue {}
+};
 </script>

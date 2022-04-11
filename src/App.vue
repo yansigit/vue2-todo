@@ -1,12 +1,23 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/write">About</router-link>
+      <router-link :to="ROUTE.HOME.PATH">{{ ROUTE.HOME.NAME }}</router-link> |
+      <router-link :to="ROUTE.WRITE.PATH">{{ ROUTE.WRITE.NAME }}</router-link>
     </nav>
     <router-view />
   </div>
 </template>
+
+<script lang="ts">
+import { ROUTE } from '@/constants/router.constant';
+
+export default {
+  name: 'App',
+  data: function () {
+    return { ROUTE };
+  },
+};
+</script>
 
 <style>
 #app {

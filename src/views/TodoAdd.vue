@@ -10,16 +10,11 @@
 
 <script lang="ts">
 export default {
-  components: {},
-  data() {
-    return {
-      message: 'Hello World!',
-    };
-  },
+  name: 'TodoAdd',
 };
 </script>
 
-<style>
+<style lang="scss" module>
 button {
   margin-left: 10px;
 }

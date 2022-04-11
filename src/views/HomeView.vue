@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import mockup from '@/store/mockup';
-import TodoList from '@/components/todo-list.vue';
+import TodoList from '@/components/TodoList.vue';
 
 export default {
   components: { TodoList },

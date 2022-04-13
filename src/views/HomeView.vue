@@ -1,19 +1,20 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <TodoList v-for="todo in todos" v-bind:key="todo.text" v-bind:todo="todo" />
+    <TodoList :todos="todos" />
   </div>
 </template>
 
 <script lang="ts">
-import mockup from '@/store/mockup';
 import TodoList from '@/components/TodoList.vue';
+const storage = window.localStorage;
+const todos = JSON.parse(storage.getItem('todos') || '[]');
 
 export default {
   components: { TodoList },
   data: function () {
     return {
-      todos: mockup,
+      todos,
     };
   },
 };

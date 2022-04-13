@@ -12,8 +12,9 @@
 <script lang="ts">
 import Vue from 'vue';
 import TodoList from '@/components/TodoList.vue';
+import { STORAGE } from '@/constants/storage.constrant';
 const storage = window.localStorage;
-const todos = JSON.parse(storage.getItem('todos') || '[]');
+const todos = JSON.parse(storage.getItem(STORAGE.TODOS) || '[]');
 
 export default Vue.extend({
   name: 'TodoAdd',
@@ -30,7 +31,7 @@ export default Vue.extend({
   methods: {
     addTodo(): void {
       this.todos = [...this.todos, { text: this.msg }];
-      storage.setItem('todos', JSON.stringify(this.todos));
+      storage.setItem(STORAGE.TODOS, JSON.stringify(this.todos));
     },
   },
 });

@@ -1,18 +1,20 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <TodoList v-for="todo in todos" v-bind:key="todo.text" v-bind:todo="todo" />
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import mockup from '@/store/mockup';
+import TodoList from '@/components/TodoList.vue';
 
-@Component({
-  components: {
-    HelloWorld,
+export default {
+  components: { TodoList },
+  data: function () {
+    return {
+      todos: mockup,
+    };
   },
-})
-export default class HomeView extends Vue {}
+};
 </script>

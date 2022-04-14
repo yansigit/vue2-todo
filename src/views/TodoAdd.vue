@@ -2,16 +2,39 @@
   <div class="about">
     <h3>할일을 작성해주세요</h3>
     <div>
-      <input type="text" v-model="message" />
-      <button type="button">추가</button>
+      <input name="msg" type="text" v-model="msg" />
+      <button @click="addTodo">추가</button>
     </div>
+    <TodoList :todos="todos" />
   </div>
 </template>
 
 <script lang="ts">
-export default {
+import Vue from 'vue';
+import TodoList from '@/components/TodoList.vue';
+import { STORAGE } from '@/constants/storage.constrant';
+const storage = window.localStorage;
+const todos = JSON.parse(storage.getItem(STORAGE.TODOS) || '[]');
+
+export default Vue.extend({
   name: 'TodoAdd',
-};
+  components: {
+    TodoList,
+  },
+  data() {
+    const data = {
+      todos,
+      msg: '',
+    };
+    return data;
+  },
+  methods: {
+    addTodo(): void {
+      this.todos = [...this.todos, { text: this.msg }];
+      storage.setItem(STORAGE.TODOS, JSON.stringify(this.todos));
+    },
+  },
+});
 </script>
 
 <style lang="scss" module>

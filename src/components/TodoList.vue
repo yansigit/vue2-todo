@@ -7,8 +7,9 @@
 
 <script lang="ts">
 import Vue from 'vue';
+
 export default Vue.component('TodoList', {
-  props: ['todos'],
+  props: { todos: String },
   computed: {
     isTodosEmpty(): boolean {
       return this.todos.length <= 0;

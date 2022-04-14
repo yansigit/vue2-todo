@@ -2,7 +2,7 @@
   <div class="about">
     <h3>할일을 작성해주세요</h3>
     <div>
-      <input name="msg" type="text" v-model="msg" />
+      <input v-model="msg" name="msg" type="text" />
       <button @click="addTodo">추가</button>
     </div>
     <TodoList :todos="todos" />
@@ -13,6 +13,7 @@
 import Vue from 'vue';
 import TodoList from '@/components/TodoList.vue';
 import { STORAGE } from '@/constants/storage.constrant';
+
 const storage = window.localStorage;
 const todos = JSON.parse(storage.getItem(STORAGE.TODOS) || '[]');
 
@@ -22,11 +23,10 @@ export default Vue.extend({
     TodoList,
   },
   data() {
-    const data = {
+    return {
       todos,
       msg: '',
     };
-    return data;
   },
   methods: {
     addTodo(): void {

@@ -1,8 +1,8 @@
 # vue2-todo-ts
 
 - [x] vue 2
-- [ ] vue 3 마이그레이션
-- [ ] local storage => vuex 변경
+- [x] vue 3 마이그레이션
+- [x] local storage => vuex 변경
 - [x] typescript 적용
 - [ ] 원하면 API 연동( jsonplaceholder 통해서 fetch후 vuex 저장 및 목록 노출 )
 

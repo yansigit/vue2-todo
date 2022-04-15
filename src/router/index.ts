@@ -1,30 +1,32 @@
-import Vue from 'vue';
-import VueRouter, { RouteConfig } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import { ROUTE } from '@/constants/router.constant';
 
-Vue.use(VueRouter);
-
-const routes: Array<RouteConfig> = [
+const routes = [
   {
     path: ROUTE.HOME.PATH,
     name: ROUTE.HOME.NAME,
     component: HomeView,
+    meta: {
+      keepAlive: false,
+      reuse: false,
+    },
   },
   {
     path: ROUTE.WRITE.PATH,
     name: ROUTE.WRITE.NAME,
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    meta: {
+      keepAlive: false,
+      reuse: false,
+    },
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/TodoAdd.vue'),
+      import(/* webpackChunkName: "about" */ '../views/TodoAdd.vue'),
   },
 ];
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
+const router = createRouter({
+  history: createWebHistory(),
+  // base: process.env.BASE_URL,
   routes,
 });
 

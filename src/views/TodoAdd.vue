@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import TodoList from '@/components/TodoList.vue';
 import store from '@/store';
 
@@ -27,19 +27,22 @@ export default defineComponent({
   components: {
     TodoList,
   },
-  data() {
-    return {
-      msg: '',
-      todoIdx: 0,
+  setup() {
+    const msg = ref('');
+    const todoIdx = ref(0);
+    const addTodo = () => {
+      store.commit('addTodo', msg.value);
     };
-  },
-  methods: {
-    addTodo() {
-      store.commit('addTodo', this.msg);
-    },
-    fetchTodo() {
-      store.dispatch('fetchTodo', this.todoIdx);
-    },
+    const fetchTodo = () => {
+      store.dispatch('fetchTodo', todoIdx.value);
+    };
+
+    return {
+      msg,
+      todoIdx,
+      addTodo,
+      fetchTodo,
+    };
   },
 });
 </script>

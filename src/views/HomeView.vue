@@ -12,9 +12,10 @@ import store from '@/store';
 
 export default defineComponent({
   components: { TodoList },
-  data() {
+  setup() {
+    const todos = store.getters.getTodos;
     return {
-      todos: store.getters.getTodos,
+      todos,
     };
   },
 });

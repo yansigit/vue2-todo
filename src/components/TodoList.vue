@@ -6,17 +6,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { computed, defineComponent } from 'vue';
 import store from '@/store';
 
 export default defineComponent({
-  computed: {
-    todos() {
+  setup() {
+    const todos = computed(() => {
       return store.getters.getTodos as Array<string>;
-    },
-    isTodosEmpty(): boolean {
+    });
+    const isTodosEmpty = computed(() => {
       return store.state.todos.length <= 0;
-    },
+    });
+    return {
+      todos,
+      isTodosEmpty,
+    };
   },
 });
 </script>

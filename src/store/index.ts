@@ -20,7 +20,6 @@ const vuex = new Vuex.Store({
   },
   actions: {
     async fetchTodo({ commit }: any, todoIdx: number) {
-      console.log('fetchTodos', todoIdx);
       await axios
         .get('https://jsonplaceholder.typicode.com/todos/' + todoIdx)
         .then((response) => {

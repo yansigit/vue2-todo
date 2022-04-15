@@ -1,18 +1,21 @@
 <template>
   <h3 v-if="isTodosEmpty">목록이 없습니다</h3>
   <ul v-else>
-    <li v-for="todo in todos" :key="todo.text">{{ todo.text }}</li>
+    <li v-for="todo in todos" :key="todo.text">{{ todo }}</li>
   </ul>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
+import store from '@/store';
 
-export default Vue.component('TodoList', {
-  props: { todos: String },
+export default defineComponent({
   computed: {
+    todos() {
+      return store.state.todos;
+    },
     isTodosEmpty(): boolean {
-      return this.todos.length <= 0;
+      return store.state.todos.length <= 0;
     },
   },
 });

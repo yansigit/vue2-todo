@@ -5,33 +5,33 @@
       <input v-model="msg" name="msg" type="text" />
       <button @click="addTodo">추가</button>
     </div>
-    <TodoList :todos="todos" />
+    <TodoList />
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import TodoList from '@/components/TodoList.vue';
-import { STORAGE } from '@/constants/storage.constrant';
+import store from '@/store';
 
-const storage = window.localStorage;
-const todos = JSON.parse(storage.getItem(STORAGE.TODOS) || '[]');
-
-export default Vue.extend({
+export default defineComponent({
   name: 'TodoAdd',
   components: {
     TodoList,
   },
   data() {
     return {
-      todos,
       msg: '',
     };
   },
+  computed: {
+    todos() {
+      return store.state.todos as Array<string>;
+    },
+  },
   methods: {
-    addTodo(): void {
-      this.todos = [...this.todos, { text: this.msg }];
-      storage.setItem(STORAGE.TODOS, JSON.stringify(this.todos));
+    addTodo() {
+      store.commit('addTodo', this.msg);
     },
   },
 });

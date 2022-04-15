@@ -1,18 +1,23 @@
-import { createStore } from 'vuex';
+import Vuex from 'vuex';
 
-export default createStore({
-  state: {
-    count: 0,
+interface TodoState {
+  todos: Array<string>;
+}
+
+export default new Vuex.Store({
+  state() {
+    return {
+      todos: [],
+    } as TodoState;
   },
   mutations: {
-    increment(state) {
-      state.count++;
-    },
-    decrement(state) {
-      state.count--;
+    addTodo(state: TodoState, todo: string) {
+      state.todos.push(todo);
     },
   },
-  getters: {},
-  actions: {},
-  modules: {},
+  getters: {
+    getTodos(state: TodoState): Array<string> {
+      return state.todos;
+    },
+  },
 });

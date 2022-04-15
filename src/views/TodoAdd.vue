@@ -4,6 +4,14 @@
     <div>
       <input v-model="msg" name="msg" type="text" />
       <button @click="addTodo">추가</button>
+      <span>|</span>
+      <input
+        v-model.number="todoIdx"
+        :class="$style.todoIdx"
+        name="todoIdx"
+        type="number"
+      />
+      <button @click="fetchTodo">TODO 추가</button>
     </div>
     <TodoList />
   </div>
@@ -22,16 +30,15 @@ export default defineComponent({
   data() {
     return {
       msg: '',
+      todoIdx: 0,
     };
-  },
-  computed: {
-    todos() {
-      return store.state.todos as Array<string>;
-    },
   },
   methods: {
     addTodo() {
       store.commit('addTodo', this.msg);
+    },
+    fetchTodo() {
+      store.dispatch('fetchTodo', this.todoIdx);
     },
   },
 });
@@ -40,5 +47,13 @@ export default defineComponent({
 <style lang="scss" module>
 button {
   margin-left: 10px;
+}
+
+span {
+  margin: 0 10px;
+}
+
+.todoIdx {
+  width: 30px;
 }
 </style>

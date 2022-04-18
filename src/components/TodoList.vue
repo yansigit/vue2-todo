@@ -12,7 +12,7 @@ import store from '@/store';
 export default defineComponent({
   computed: {
     todos() {
-      return store.state.todos;
+      return store.getters.getTodos as Array<string>;
     },
     isTodosEmpty(): boolean {
       return store.state.todos.length <= 0;

@@ -1,10 +1,8 @@
 import Vuex from 'vuex';
+import axios from 'axios';
+import { JsonPlaceHolderTodo, TodoState } from '@/constants/store.constants';
 
-interface TodoState {
-  todos: Array<string>;
-}
-
-export default new Vuex.Store({
+const vuex = new Vuex.Store({
   state() {
     return {
       todos: [],
@@ -17,7 +15,19 @@ export default new Vuex.Store({
   },
   getters: {
     getTodos(state: TodoState): Array<string> {
-      return state.todos;
+      return [...state.todos];
+    },
+  },
+  actions: {
+    async fetchTodo({ commit }: any, todoIdx: number) {
+      await axios
+        .get('https://jsonplaceholder.typicode.com/todos/' + todoIdx)
+        .then((response) => {
+          const todos: JsonPlaceHolderTodo = response.data;
+          commit('addTodo', todos.title);
+        });
     },
   },
 });
+
+export default vuex;

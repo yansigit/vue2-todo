@@ -7,16 +7,15 @@
 
 <script lang="ts">
 import TodoList from '@/components/TodoList.vue';
-import { STORAGE } from '@/constants/storage.constrant';
-const storage = window.localStorage;
-const todos = JSON.parse(storage.getItem(STORAGE.TODOS) || '[]');
+import { defineComponent } from 'vue';
+import store from '@/store';
 
-export default {
+export default defineComponent({
   components: { TodoList },
-  data: function () {
+  data() {
     return {
-      todos,
+      todos: store.getters.getTodos,
     };
   },
-};
+});
 </script>
